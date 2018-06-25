@@ -37,7 +37,7 @@ RUN set -ex \
 	&& rm python.tar.xz \
 	\
 	&& cd /usr/src/python \
-	&& gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" \
+	&& gnuArch="$(dpkg-architecture -qDEB_BUILD_GNU_TYPE)" \
 	&& ./configure \
 		--build="$gnuArch" \
 		--enable-shared \
@@ -80,7 +80,5 @@ RUN set -ex; \
 
 # install "virtualenv", since the vast majority of users of this image will want it
 RUN pip install --no-cache-dir virtualenv
-
-RUN apt-get update && apt-get install -y graphviz plantuml texlive texlive-latex-extra texlive-lang-all
 
 CMD ["python2"]
